@@ -20,8 +20,16 @@ class Kernel extends ConsoleKernel
      */
     protected function commands(): void
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }
+    protected $routeMiddleware = [
+        // middleware default Laravel
+        'auth' => \App\Http\Middleware\Authenticate::class,
+        'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
+
+        // middleware custom
+        'role' => \App\Http\Middleware\RoleMiddleware::class,
+    ];
 }
