@@ -38,4 +38,9 @@ Route::middleware(['auth', 'role:owner'])->group(function () {
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
 });
 
+Route::middleware(['auth', 'role:admin'])->group(function () {
+    Route::resource('booking', BookingController::class);
+});
+
+
 require __DIR__.'/auth.php';
